@@ -40,6 +40,13 @@
             android:text="Add an Event"
             android:textAlignment="center"
             android:textColor="#FFF" />
+
+
+
+
+
+
+
     </LinearLayout>
     <include
         layout="@layout/app_bar_main"
@@ -54,6 +61,7 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer" >
+
 
     </android.support.design.widget.NavigationView>
 
