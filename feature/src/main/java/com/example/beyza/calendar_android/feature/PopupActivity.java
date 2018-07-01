@@ -3,6 +3,7 @@ package com.example.beyza.calendar_android.feature;
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -20,17 +21,23 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import java.util.Calendar;
 import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.widget.Toast;
 
 public class PopupActivity extends AppCompatActivity {
 
-    private EditText et_title,et_content;
-    private String title,content;
-    Button add,cancel;
+    private EditText et_title,et_content,et_loc;
+    private String title,content,location;
+    private Button add,cancel;
+    private Button remind_me,repeat;
+
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -50,9 +57,110 @@ public class PopupActivity extends AppCompatActivity {
 
         et_title = (EditText)findViewById(R.id.event_title);
         et_content = (EditText)findViewById(R.id.event_content);
+        et_loc = (EditText)findViewById(R.id.event_loc);
+
+
+
+        // reminder set edilmesi ;
+
+        remind_me = (Button) findViewById(R.id.remind_btn);
+        remind_me.setOnClickListener( new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view)
+            {
+
+
+                    startActivity(new Intent(PopupActivity.this, Popup_Reminder.class));
+
+                   // Toast.makeText(PopupActivity.this, remind_me.getText(), Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
+
+
+        // repeat ;
+
+        repeat = (Button) findViewById(R.id.repeat_btn);
+        repeat.setOnClickListener( new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view)
+            {
+
+
+                    startActivity(new Intent(PopupActivity.this, Popup_Repeat.class));
+
+                   // Toast.makeText(PopupActivity.this, repeat.getText(), Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
+
+
+
+
+
+
+        //cancel butonuna basılınca popup ekrandan çıkıyor;
+
+        cancel = (Button) findViewById(R.id.cancel_btn);
+        cancel.setOnClickListener(new View.OnClickListener(){
+
+
+           @Override
+           public void onClick(View view) {
+
+               finish();
+
+           }
+
+        }
+        );
+
+
+
+        //add butonuna basılınca event database'e eklenir;
+        //database'e eklenecek bilgiler buradan alınır;
+
+        add = (Button)findViewById(R.id.add_btn);
+        add.setOnClickListener( new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view)
+            {
+
+                title = et_title.getText().toString();
+                content = et_content.getText().toString();
+                location = et_loc.getText().toString();
+
+
+            }
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     }
+
+
 
 
 

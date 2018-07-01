@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity
 
 
         //popup screen
+
         addEvent = (Button) findViewById(R.id.addEventBtn);
         addEvent.setOnClickListener(new View.OnClickListener() {
             @Override
