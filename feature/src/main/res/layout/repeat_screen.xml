@@ -51,42 +51,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Asla" />
+            android:text="Never" />
 
         <RadioButton
             android:id="@+id/repeat_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Her gün" />
+            android:text="Every day" />
 
         <RadioButton
             android:id="@+id/repeat_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Her hafta" />
+            android:text="Every week" />
 
         <RadioButton
             android:id="@+id/repeat_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="2 haftada bir" />
+            android:text="Every 2 weeks" />
 
         <RadioButton
             android:id="@+id/repeat_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Her ay" />
+            android:text="Every month" />
 
         <RadioButton
             android:id="@+id/repeat_6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Her yıl" />
+            android:text="Every year" />
 
         />
 

@@ -25,6 +25,9 @@ import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import java.io.File;
+import java.io.FileWriter;
 import java.util.Calendar;
 import android.app.DatePickerDialog;
 import android.graphics.Color;
@@ -37,17 +40,17 @@ public class PopupActivity extends AppCompatActivity {
     private String title,content,location;
     private Button add,cancel;
     private Button remind_me,repeat;
-
-
+    private String currentSelectedDate;
+    private String currentSelectedReminderIndex;
+    private String currentSelectedRepeaterIndex;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
 
 
         super.onCreate(savedInstanceState);
-
+        MainActivity dateGetter = new MainActivity();
 
         setContentView(R.layout.popup_screen);
-
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -59,10 +62,9 @@ public class PopupActivity extends AppCompatActivity {
         et_content = (EditText)findViewById(R.id.event_content);
         et_loc = (EditText)findViewById(R.id.event_loc);
 
-
+        currentSelectedDate = dateGetter.getDate();  //getting the date from calendarView
 
         // reminder set edilmesi ;
-
         remind_me = (Button) findViewById(R.id.remind_btn);
         remind_me.setOnClickListener( new View.OnClickListener() {
 
@@ -72,7 +74,6 @@ public class PopupActivity extends AppCompatActivity {
 
 
                     startActivity(new Intent(PopupActivity.this, Popup_Reminder.class));
-
                    // Toast.makeText(PopupActivity.this, remind_me.getText(), Toast.LENGTH_SHORT).show();
 
             }
@@ -123,6 +124,7 @@ public class PopupActivity extends AppCompatActivity {
 
         //add butonuna basılınca event database'e eklenir;
         //database'e eklenecek bilgiler buradan alınır;
+        // reminderlar ve repeatler henuz alınmadı alınacak.
 
         add = (Button)findViewById(R.id.add_btn);
         add.setOnClickListener( new View.OnClickListener() {
@@ -134,34 +136,16 @@ public class PopupActivity extends AppCompatActivity {
                 title = et_title.getText().toString();
                 content = et_content.getText().toString();
                 location = et_loc.getText().toString();
+                currentSelectedReminderIndex = Popup_Reminder.reminderIndex;    //gets selected reminder from radio boxes
+                currentSelectedRepeaterIndex = Popup_Repeat.repeaterIndex;      //gets selected repeat interval from radio boxes
+
+
 
 
             }
 
         });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
-
-
-
-
 
 }

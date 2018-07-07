@@ -53,63 +53,63 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Etkinlik Saatinde" />
+            android:text="At event time" />
 
         <RadioButton
             android:id="@+id/remind_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Etkinlikten 5 dk önce" />
-
-        <RadioButton
-            android:id="@+id/remind_9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Etkinlikten 1 hafta önce" />
+            android:text="5 Min Before" />
 
         <RadioButton
             android:id="@+id/remind_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Etkinlikten 15 dk önce" />
+            android:text="15 Min Before" />
 
         <RadioButton
             android:id="@+id/remind_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Etkinlikten 30 dk önce" />
+            android:text="30 Min Before" />
 
         <RadioButton
             android:id="@+id/remind_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Etkinlikten 1 saat önce" />
+            android:text="1 Hour Before" />
 
         <RadioButton
             android:id="@+id/remind_6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Etkinlikten 2 saat önce" />
+            android:text="2 Hour Before" />
 
         <RadioButton
             android:id="@+id/remind_7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Etkinlikten 1 gün önce" />
+            android:text="1 Day Before" />
 
         <RadioButton
             android:id="@+id/remind_8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Etkinlikten 2 gün önce" />
+            android:text="2 Day Before" />
+
+        <RadioButton
+            android:id="@+id/remind_9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1 Week Before" />
 
     </RadioGroup>
 

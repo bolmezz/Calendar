@@ -21,19 +21,22 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import android.widget.TextView;
 import java.util.Calendar;
 import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    public static String selectedDate;
     CalendarView calendarView;
-    TextView selectedDate;
     Button addEvent;
 
     private EditText et_title ,et_content;
@@ -65,31 +68,36 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        calendarView = (CalendarView) findViewById(R.id.calendarView);
+        calendarView= (CalendarView) findViewById(R.id.calendarView);
 
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {  //button
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
-                //we need to add here, what the button on the screen will do
+                String secilenTarih = (i1+1)+"/"+i2+"/"+i;
+                setDate(secilenTarih);
+
             }
         });
 
-
         //popup screen
-
         addEvent = (Button) findViewById(R.id.addEventBtn);
         addEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 startActivity(new Intent(MainActivity.this,PopupActivity.class));
 
             }
         });
+    }
 
+    private void setDate(String date){
+        selectedDate = date;
 
     }
 
+    public String getDate(){
+        return selectedDate;
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

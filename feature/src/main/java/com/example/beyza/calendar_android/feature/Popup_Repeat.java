@@ -1,5 +1,7 @@
 package com.example.beyza.calendar_android.feature;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -15,7 +17,7 @@ public class Popup_Repeat extends AppCompatActivity {
     private RadioGroup repeat;
     private RadioButton repeat_it;
     private Button ok,cancel;
-
+    public static String repeaterIndex;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -44,11 +46,6 @@ public class Popup_Repeat extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-
-                int selectedId = repeat.getCheckedRadioButtonId();
-                repeat_it = (RadioButton) findViewById(selectedId);
-
-
 
             }
 
@@ -84,28 +81,23 @@ public class Popup_Repeat extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                    finish();
+                int selectedId = repeat.getCheckedRadioButtonId();
+                repeat_it = (RadioButton) findViewById(selectedId);
+                setRepeaterIndex(repeat_it.getText().toString());
+                finish();
 
             }
 
         });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
+    private void setRepeaterIndex(String a){
+        repeaterIndex = a;
+    }
+
+    public String getRepeaterIndex(){
+        return repeaterIndex;
+    }
 
 }

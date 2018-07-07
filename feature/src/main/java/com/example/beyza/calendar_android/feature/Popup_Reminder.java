@@ -3,6 +3,7 @@ package com.example.beyza.calendar_android.feature;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -14,7 +15,7 @@ public class Popup_Reminder extends AppCompatActivity{
     private RadioGroup reminder;
     private RadioButton remind_me;
     private Button ok,cancel;
-
+    public static String reminderIndex;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
 
@@ -41,12 +42,7 @@ public class Popup_Reminder extends AppCompatActivity{
             public void onClick(View view)
             {
 
-                int selectedId = reminder.getCheckedRadioButtonId();
-                remind_me = (RadioButton) findViewById(selectedId);
-
-
             }
-
         });
 
 
@@ -68,7 +64,7 @@ public class Popup_Reminder extends AppCompatActivity{
 
 
 
-        //ok butonuna basılınca event database'e eklenir;
+        //ok butonuna basılınca ne surede bir tekrarlanacak set edilir;
 
         ok = (Button)findViewById(R.id.ok_btn);
         ok.setOnClickListener( new View.OnClickListener() {
@@ -76,14 +72,21 @@ public class Popup_Reminder extends AppCompatActivity{
             @Override
             public void onClick(View view)
             {
-
-
-                    finish();
-
-
+                int selectedId = reminder.getCheckedRadioButtonId();
+                remind_me = (RadioButton) findViewById(selectedId);
+                setReminderIndex(remind_me.getText().toString());
+                finish();
             }
 
         });
 
     }
+
+    private void setReminderIndex(String a){
+        reminderIndex = a;
     }
+
+    public String getReminderIndex(){
+        return reminderIndex;
+    }
+}
