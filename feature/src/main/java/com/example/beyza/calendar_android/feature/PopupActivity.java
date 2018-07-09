@@ -1,38 +1,20 @@
 package com.example.beyza.calendar_android.feature;
 
-import android.annotation.SuppressLint;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.EditText;
-import android.widget.PopupWindow;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.util.Calendar;
-import android.app.DatePickerDialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import java.text.SimpleDateFormat;
+import java.io.DataOutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Date;
 import android.widget.Toast;
+import org.json.JSONObject;
 
 public class PopupActivity extends AppCompatActivity {
 
@@ -40,6 +22,7 @@ public class PopupActivity extends AppCompatActivity {
     private String title,content,location;
     private Button add,cancel;
     private Button remind_me,repeat;
+    private String currentDate;
     private String currentSelectedDate;
     private String currentSelectedReminderIndex;
     private String currentSelectedRepeaterIndex;
@@ -62,7 +45,7 @@ public class PopupActivity extends AppCompatActivity {
         et_content = (EditText)findViewById(R.id.event_content);
         et_loc = (EditText)findViewById(R.id.event_loc);
 
-        currentSelectedDate = dateGetter.getDate();  //getting the date from calendarView
+        currentDate = dateGetter.getDate();  //getting the date from calendarView
 
         // reminder set edilmesi ;
         remind_me = (Button) findViewById(R.id.remind_btn);
@@ -124,7 +107,6 @@ public class PopupActivity extends AppCompatActivity {
 
         //add butonuna basılınca event database'e eklenir;
         //database'e eklenecek bilgiler buradan alınır;
-        // reminderlar ve repeatler henuz alınmadı alınacak.
 
         add = (Button)findViewById(R.id.add_btn);
         add.setOnClickListener( new View.OnClickListener() {
@@ -132,20 +114,69 @@ public class PopupActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-
-                title = et_title.getText().toString();
-                content = et_content.getText().toString();
-                location = et_loc.getText().toString();
-                currentSelectedReminderIndex = Popup_Reminder.reminderIndex;    //gets selected reminder from radio boxes
-                currentSelectedRepeaterIndex = Popup_Repeat.repeaterIndex;      //gets selected repeat interval from radio boxes
-
-
-
-
+                sendPost();
+                Toast.makeText(PopupActivity.this, "Event Created!", Toast.LENGTH_SHORT).show();
+                finish();
             }
 
         });
 
+    }
+
+    public void sendPost() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL("https://immense-coast-39524.herokuapp.com/calendars");
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("POST");
+                    conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                    conn.setRequestProperty("Accept","application/json");
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
+
+                    title = et_title.getText().toString();
+                    content = et_content.getText().toString();
+                    location = et_loc.getText().toString();
+                    currentSelectedReminderIndex = Popup_Reminder.reminderIndex;    //gets selected reminder from radio boxes
+                    currentSelectedRepeaterIndex = Popup_Repeat.repeaterIndex;      //gets selected repeat interval from radio boxes
+                    currentSelectedDate = currentDate;  //current date
+
+                    Date date1=new SimpleDateFormat("yyyy-MM-dd").parse(currentSelectedDate);
+
+
+                    JSONObject jsonParam = new JSONObject();
+                    jsonParam.put("title", title);
+                    jsonParam.put("content", content);
+                    jsonParam.put("location", location);
+                    jsonParam.put("start_date", date1);
+                    jsonParam.put("start_time", "08:00");
+                    jsonParam.put("end_date", date1);
+                    jsonParam.put("end_time", "09:00");
+                    jsonParam.put("repeat", currentSelectedRepeaterIndex);
+                    jsonParam.put("reminder", currentSelectedReminderIndex);
+
+
+                    Log.i("JSON", jsonParam.toString());
+                    DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+                    //os.writeBytes(URLEncoder.encode(jsonParam.toString(), "UTF-8"));
+                    os.writeBytes(jsonParam.toString());
+
+                    os.flush();
+                    os.close();
+
+                    Log.i("STATUS", String.valueOf(conn.getResponseCode()));
+                    Log.i("MSG" , conn.getResponseMessage());
+
+                    conn.disconnect();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
     }
 
 }

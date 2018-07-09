@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
-                String secilenTarih = (i1+1)+"/"+i2+"/"+i;
+                String secilenTarih = (i)+"-"+(i1+1)+"-"+i2;
                 setDate(secilenTarih);
 
             }
