@@ -46,6 +46,15 @@
 
         </activity>
 
+        <activity
+            android:name=".DrawerActivity"
+            android:splitName="feature"
+            android:label="Events"
+            android:theme="@style/AppTheme.NoActionBar" >
+
+        </activity>
+
+
     </application>
 
 </manifest>
