@@ -86,11 +86,15 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
         android:background="@android:color/holo_blue_dark"
-        android:text="Remind Me"
+        android:text="Remınd Me"
         android:textColor="@android:color/background_light"
-        app:layout_constraintBottom_toTopOf="@+id/repeat_btn"
-        app:layout_constraintTop_toBottomOf="@+id/event_loc"
-        tools:layout_editor_absoluteX="53dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/repeat_btn"
+        app:layout_constraintHorizontal_bias="0.222"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.442" />
 
     <Button
         android:id="@+id/repeat_btn"
@@ -100,9 +104,65 @@
         android:text="Repeat"
         android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.653"
-        tools:layout_editor_absoluteX="53dp" />
+        app:layout_constraintVertical_bias="0.441" />
+
+
+    <TimePicker
+        android:id="@+id/startTime"
+        android:layout_width="217dp"
+        android:layout_height="91dp"
+        android:scaleX="0.9"
+        android:scaleY="0.9"
+        android:timePickerMode="spinner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.621"
+        tools:ignore="MissingConstraints"></TimePicker>
+
+
+    <TimePicker
+        android:id="@+id/endTime"
+        android:layout_width="217dp"
+        android:layout_height="91dp"
+        android:scaleX="0.9"
+        android:scaleY="0.9"
+        android:timePickerMode="spinner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.831"
+        tools:ignore="MissingConstraints"></TimePicker>
+
+    <TextView
+        android:id="@+id/t_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" Start : "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.56" />
+
+    <TextView
+        android:id="@+id/t_finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="Finish : "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/t_start" />
 
 
 </android.support.constraint.ConstraintLayout>

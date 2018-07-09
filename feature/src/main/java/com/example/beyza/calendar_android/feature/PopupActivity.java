@@ -13,6 +13,8 @@ import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
+
+import android.widget.TimePicker;
 import android.widget.Toast;
 import org.json.JSONObject;
 
@@ -21,11 +23,13 @@ public class PopupActivity extends AppCompatActivity {
     private EditText et_title,et_content,et_loc;
     private String title,content,location;
     private Button add,cancel;
-    private Button remind_me,repeat;
+    private Button remind_me,repeat,time;
     private String currentDate;
     private String currentSelectedDate;
     private String currentSelectedReminderIndex;
     private String currentSelectedRepeaterIndex;
+    private String start_t, finish_t;
+    private TimePicker start_Time,finish_Time;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
 
@@ -64,6 +68,7 @@ public class PopupActivity extends AppCompatActivity {
         });
 
 
+
         // repeat ;
 
         repeat = (Button) findViewById(R.id.repeat_btn);
@@ -74,15 +79,22 @@ public class PopupActivity extends AppCompatActivity {
             {
 
 
-                    startActivity(new Intent(PopupActivity.this, Popup_Repeat.class));
+                startActivity(new Intent(PopupActivity.this, Popup_Repeat.class));
 
-                   // Toast.makeText(PopupActivity.this, repeat.getText(), Toast.LENGTH_SHORT).show();
+                // Toast.makeText(PopupActivity.this, repeat.getText(), Toast.LENGTH_SHORT).show();
 
             }
 
         });
 
 
+
+
+        start_Time = (TimePicker) findViewById(R.id.startTime);
+        start_Time.setIs24HourView(true);
+
+        finish_Time = (TimePicker) findViewById(R.id.endTime);
+        finish_Time.setIs24HourView(true);
 
 
 
@@ -106,7 +118,7 @@ public class PopupActivity extends AppCompatActivity {
 
 
         //add butonuna basılınca event database'e eklenir;
-        //database'e eklenecek bilgiler buradan alınır;
+
 
         add = (Button)findViewById(R.id.add_btn);
         add.setOnClickListener( new View.OnClickListener() {
@@ -123,6 +135,7 @@ public class PopupActivity extends AppCompatActivity {
 
     }
 
+    //database'e alınan verileri gönderir
     public void sendPost() {
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -143,6 +156,16 @@ public class PopupActivity extends AppCompatActivity {
                     currentSelectedRepeaterIndex = Popup_Repeat.repeaterIndex;      //gets selected repeat interval from radio boxes
                     currentSelectedDate = currentDate;  //current date
 
+                    // event'in başlangıç ve bitiş saatleri alınıyor;
+
+                    int hour1 = start_Time.getCurrentHour();
+                    int min1 = start_Time.getCurrentMinute();
+                    int hour2 = finish_Time.getCurrentHour();
+                    int min2 = finish_Time.getCurrentMinute();
+                    start_t = hour1+":"+min1;
+                    finish_t = hour2+":"+min2;
+
+
                     Date date1=new SimpleDateFormat("yyyy-MM-dd").parse(currentSelectedDate);
 
 
@@ -151,9 +174,9 @@ public class PopupActivity extends AppCompatActivity {
                     jsonParam.put("content", content);
                     jsonParam.put("location", location);
                     jsonParam.put("start_date", date1);
-                    jsonParam.put("start_time", "08:00");
+                    jsonParam.put("start_time", start_t);
                     jsonParam.put("end_date", date1);
-                    jsonParam.put("end_time", "09:00");
+                    jsonParam.put("end_time", finish_t);
                     jsonParam.put("repeat", currentSelectedRepeaterIndex);
                     jsonParam.put("reminder", currentSelectedReminderIndex);
 
