@@ -2,21 +2,22 @@ package com.example.beyza.calendar_android.feature;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
-import java.text.SimpleDateFormat;
+import android.widget.TimePicker;
+import android.widget.Toast;
+
+import org.json.JSONObject;
+
 import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import android.widget.TimePicker;
-import android.widget.Toast;
-import org.json.JSONObject;
 
 public class PopupActivity extends AppCompatActivity {
 
@@ -133,7 +134,7 @@ public class PopupActivity extends AppCompatActivity {
 
         });
 
-    }
+    }//oncreate
 
     //database'e alınan verileri gönderir
     public void sendPost() {
