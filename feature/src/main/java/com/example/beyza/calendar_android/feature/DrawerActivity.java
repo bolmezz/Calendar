@@ -36,6 +36,9 @@ public class DrawerActivity extends AppCompatActivity {
     ArrayList<HashMap<String, String>> contactList;
     TextView titleT ;
 
+    public DrawerActivity() {
+    }
+
     // Database'den çekilen veriler burada listelenecek
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -47,6 +50,9 @@ public class DrawerActivity extends AppCompatActivity {
 
         titleT = (TextView) findViewById(R.id.title);
 
+        pDialog = new ProgressDialog(DrawerActivity.this);
+        pDialog.setMessage("Fetching From Server...");
+        pDialog.show();
 
         new GetContacts().execute("https://immense-coast-39524.herokuapp.com/calendars");
 
@@ -57,9 +63,6 @@ public class DrawerActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(DrawerActivity.this);
-            pDialog.show();
-            Toast.makeText(DrawerActivity.this, "Json Data is downloading...", Toast.LENGTH_LONG).show();
 
         }
 
@@ -99,34 +102,34 @@ public class DrawerActivity extends AppCompatActivity {
 
         protected void onPostExecute(String s) {
 
+
            // super.onPostExecute(s);
              Log.d("postExecute'tan gelen",s);
 
-             pDialog.dismiss();
             try {
-
-
                 JSONArray ja = new JSONArray(s);
                 int count =ja.length();
 
                 for(int i =0; i<count;i++){
 
+                     titleT.append("EVENT" +(i+1)+"\n");
+                    JSONObject jo = ja.getJSONObject(i);
+                    titleT.append("Title: " + jo.getString("title") + "\n");
+                    titleT.append("Content: " + jo.getString("content") + "\n");
+                    titleT.append("Location: " + jo.getString("location") + "\n");
+                    titleT.append("Start Date: " + jo.getString("start_date") + "\n");
+                    titleT.append("Start Time: " + jo.getString("start_time") + "\n");
+                    titleT.append("End Date: " + jo.getString("end_date") + "\n");
+                    titleT.append("End Time: " + jo.getString("end_time") + "\n");
+                    titleT.append("Repeat: " + jo.getString("repeat") + "\n");
+                    titleT.append("Reminer: " + jo.getString("reminder") + "\n");
+                    titleT.append("\n\n");
 
                 }
-
-
-                JSONObject jo = ja.getJSONObject(2);
-
-
-                titleT.append(jo.getString("title"));
-
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
-
+            pDialog.dismiss();
 
         }
 

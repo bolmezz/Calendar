@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="2dip"
             android:text=""
-            android:textColor="@color/colorAccent" />
+            android:textColor="@android:color/black" />
     </ScrollView>
 
 </RelativeLayout>
