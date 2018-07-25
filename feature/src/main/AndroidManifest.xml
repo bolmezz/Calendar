@@ -55,6 +55,20 @@
 
         </activity>
 
+        <activity
+            android:name=".SearchActivity"
+            android:splitName="feature"
+            android:theme="@style/AppTheme.NoActionBar" >
+
+        </activity>
+
+        <activity
+            android:name=".EventDetail"
+            android:splitName="feature"
+            android:theme="@style/AppTheme.NoActionBar" >
+
+        </activity>
+
 
     </application>
 

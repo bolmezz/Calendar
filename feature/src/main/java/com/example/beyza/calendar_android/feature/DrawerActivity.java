@@ -45,8 +45,8 @@ public class DrawerActivity extends AppCompatActivity {
 
         setContentView(R.layout.item_list);
 
-        events = (ListView) findViewById(R.id.eventList);
         titleT = (TextView) findViewById(R.id.title);
+
 
         new GetContacts().execute("https://immense-coast-39524.herokuapp.com/calendars");
 
@@ -57,6 +57,8 @@ public class DrawerActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            pDialog = new ProgressDialog(DrawerActivity.this);
+            pDialog.show();
             Toast.makeText(DrawerActivity.this, "Json Data is downloading...", Toast.LENGTH_LONG).show();
 
         }
@@ -100,6 +102,7 @@ public class DrawerActivity extends AppCompatActivity {
            // super.onPostExecute(s);
              Log.d("postExecute'tan gelen",s);
 
+             pDialog.dismiss();
             try {
 
 
@@ -108,13 +111,14 @@ public class DrawerActivity extends AppCompatActivity {
 
                 for(int i =0; i<count;i++){
 
-                    JSONObject jo = ja.getJSONObject(i);
 
-                    titleT.append(jo+"");
                 }
 
 
+                JSONObject jo = ja.getJSONObject(2);
 
+
+                titleT.append(jo.getString("title"));
 
 
             } catch (JSONException e) {
@@ -122,7 +126,7 @@ public class DrawerActivity extends AppCompatActivity {
             }
 
 
-    
+
 
         }
 

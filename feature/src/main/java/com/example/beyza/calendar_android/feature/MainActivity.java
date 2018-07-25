@@ -1,16 +1,9 @@
 package com.example.beyza.calendar_android.feature;
 
-import android.annotation.SuppressLint;
-import android.app.FragmentManager;
-import android.content.ContentResolver;
-import android.content.ContentValues;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.util.DisplayMetrics;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -19,17 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import android.widget.TextView;
-import java.util.Calendar;
-import android.app.DatePickerDialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity
@@ -139,12 +125,17 @@ public class MainActivity extends AppCompatActivity
 
 
         if (id == R.id.nav_event) {
-            startActivity(new Intent(MainActivity.this,DrawerActivity.class));
-
+            startActivity(new Intent(MainActivity.this, DrawerActivity.class));
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        else if (id == R.id.nav_search) {
+            startActivity(new Intent(MainActivity.this,SearchActivity.class));
+
+        }
+
+
+       DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
