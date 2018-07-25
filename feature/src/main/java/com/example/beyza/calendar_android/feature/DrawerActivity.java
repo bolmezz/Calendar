@@ -101,10 +101,19 @@ public class DrawerActivity extends AppCompatActivity {
              Log.d("postExecute'tan gelen",s);
 
             try {
-                JSONObject jo = new JSONObject(s);
+
 
                 JSONArray ja = new JSONArray(s);
-                titleT.append(ja.getString(0)+"\n");
+                int count =ja.length();
+
+                for(int i =0; i<count;i++){
+
+                    JSONObject jo = ja.getJSONObject(i);
+
+                    titleT.append(jo+"");
+                }
+
+
 
 
 
@@ -113,31 +122,7 @@ public class DrawerActivity extends AppCompatActivity {
             }
 
 
-           /*  while(!(s.equals("]"))) {
-                 String data = s.substring(s.indexOf(',') + 1, s.indexOf('}') + 1);
-                 String title = data.substring(8, data.indexOf(','));
-                 data = data.substring(data.indexOf(',') + 1);
-                 String content = data.substring(10, data.indexOf(','));
-                 data = data.substring(data.indexOf(',') + 1);
-                 String location = data.substring(11, data.indexOf(','));
-                 data = data.substring(data.indexOf(',') + 1);
-                 String sdate = data.substring(13, data.indexOf(','));
-                 data = data.substring(data.indexOf(',') + 1);
-                 String stime = data.substring(14, data.indexOf(',') - 1);
-                 data = data.substring(data.indexOf(',') + 1);
-                 String edate = data.substring(11, data.indexOf(','));
-                 data = data.substring(data.indexOf(',') + 1);
-                 String etime = data.substring(12, data.indexOf(',') - 1);
-                 data = data.substring(data.indexOf(',') + 1);
-                 String repeat = data.substring(9, data.indexOf(','));
-                 data = data.substring(data.indexOf(',') + 1);
-                 String reminder = data.substring(11, data.indexOf(','));
-
-                // titleT.append(title + " - " + content + " - " + location + " - " + sdate + " - " + stime + " - " + edate + " - " + etime + " - " + repeat + " - " + reminder + "\n");
-
-                 s = s.substring(s.indexOf('}') + 1);
-
-             }*/
+    
 
         }
 
