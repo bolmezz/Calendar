@@ -3,7 +3,6 @@ package com.example.beyza.calendar_android.feature;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -39,12 +38,6 @@ public class PopupActivity extends AppCompatActivity {
         MainActivity dateGetter = new MainActivity();
 
         setContentView(R.layout.popup_screen);
-
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-        getWindow().setLayout((int)(width*.8), (int)(height*.6));
 
         et_title = (EditText)findViewById(R.id.event_title);
         et_content = (EditText)findViewById(R.id.event_content);
