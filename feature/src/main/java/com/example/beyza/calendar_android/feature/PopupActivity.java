@@ -3,6 +3,7 @@ package com.example.beyza.calendar_android.feature;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class PopupActivity extends AppCompatActivity {
@@ -135,14 +137,6 @@ public class PopupActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("https://immense-coast-39524.herokuapp.com/calendars");
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("POST");
-                    conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
-                    conn.setRequestProperty("Accept","application/json");
-                    conn.setDoOutput(true);
-                    conn.setDoInput(true);
-
                     title = et_title.getText().toString();
                     content = et_content.getText().toString();
                     location = et_loc.getText().toString();
@@ -159,34 +153,226 @@ public class PopupActivity extends AppCompatActivity {
                     start_t = hour1+":"+min1;
                     finish_t = hour2+":"+min2;
 
+                    if(currentSelectedRepeaterIndex.equals("Every day")) {
+                        Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(currentSelectedDate);
 
-                    Date date1=new SimpleDateFormat("yyyy-MM-dd").parse(currentSelectedDate);
+                        for (int i = 0; i <10;i++) {
+                            URL url = new URL("https://immense-coast-39524.herokuapp.com/calendars");
+                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                            conn.setRequestMethod("POST");
+                            conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                            conn.setRequestProperty("Accept","application/json");
+                            conn.setDoOutput(true);
+                            conn.setDoInput(true);
+
+                            JSONObject jsonParam = new JSONObject();
+                            jsonParam.put("title", title);
+                            jsonParam.put("content", content);
+                            jsonParam.put("location", location);
+                            jsonParam.put("start_date", date1);
+                            jsonParam.put("start_time", start_t);
+                            jsonParam.put("end_date", date1);
+                            jsonParam.put("end_time", finish_t);
+                            jsonParam.put("repeat", currentSelectedRepeaterIndex);
+                            jsonParam.put("reminder", currentSelectedReminderIndex);
 
 
-                    JSONObject jsonParam = new JSONObject();
-                    jsonParam.put("title", title);
-                    jsonParam.put("content", content);
-                    jsonParam.put("location", location);
-                    jsonParam.put("start_date", date1);
-                    jsonParam.put("start_time", start_t);
-                    jsonParam.put("end_date", date1);
-                    jsonParam.put("end_time", finish_t);
-                    jsonParam.put("repeat", currentSelectedRepeaterIndex);
-                    jsonParam.put("reminder", currentSelectedReminderIndex);
+                            Log.i("JSON", jsonParam.toString());
+                            DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+                            //os.writeBytes(URLEncoder.encode(jsonParam.toString(), "UTF-8"));
+                            os.writeBytes(jsonParam.toString());
+
+                            date1 = addDay(date1, 1);
+
+                            Log.i("STATUS", String.valueOf(conn.getResponseCode()));
+                            Log.i("MSG" , conn.getResponseMessage());
+
+                            conn.disconnect();
+                        }
+
+                    }
+                    else if(currentSelectedRepeaterIndex.equals("Every week")) {
+                        Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(currentSelectedDate);
+
+                        for (int i = 0; i < 10; i++) {
+                            URL url = new URL("https://immense-coast-39524.herokuapp.com/calendars");
+                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                            conn.setRequestMethod("POST");
+                            conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                            conn.setRequestProperty("Accept", "application/json");
+                            conn.setDoOutput(true);
+                            conn.setDoInput(true);
+
+                            JSONObject jsonParam = new JSONObject();
+                            jsonParam.put("title", title);
+                            jsonParam.put("content", content);
+                            jsonParam.put("location", location);
+                            jsonParam.put("start_date", date1);
+                            jsonParam.put("start_time", start_t);
+                            jsonParam.put("end_date", date1);
+                            jsonParam.put("end_time", finish_t);
+                            jsonParam.put("repeat", currentSelectedRepeaterIndex);
+                            jsonParam.put("reminder", currentSelectedReminderIndex);
 
 
-                    Log.i("JSON", jsonParam.toString());
-                    DataOutputStream os = new DataOutputStream(conn.getOutputStream());
-                    //os.writeBytes(URLEncoder.encode(jsonParam.toString(), "UTF-8"));
-                    os.writeBytes(jsonParam.toString());
+                            Log.i("JSON", jsonParam.toString());
+                            DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+                            //os.writeBytes(URLEncoder.encode(jsonParam.toString(), "UTF-8"));
+                            os.writeBytes(jsonParam.toString());
 
-                    os.flush();
-                    os.close();
+                            date1 = addDay(date1, 7);
 
-                    Log.i("STATUS", String.valueOf(conn.getResponseCode()));
-                    Log.i("MSG" , conn.getResponseMessage());
+                            Log.i("STATUS", String.valueOf(conn.getResponseCode()));
+                            Log.i("MSG", conn.getResponseMessage());
 
-                    conn.disconnect();
+                            conn.disconnect();
+                        }
+                    }
+                    else if(currentSelectedRepeaterIndex.equals("Every 2 weeks")) {
+                        Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(currentSelectedDate);
+
+                        for (int i = 0; i < 10; i++) {
+                            URL url = new URL("https://immense-coast-39524.herokuapp.com/calendars");
+                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                            conn.setRequestMethod("POST");
+                            conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                            conn.setRequestProperty("Accept", "application/json");
+                            conn.setDoOutput(true);
+                            conn.setDoInput(true);
+
+                            JSONObject jsonParam = new JSONObject();
+                            jsonParam.put("title", title);
+                            jsonParam.put("content", content);
+                            jsonParam.put("location", location);
+                            jsonParam.put("start_date", date1);
+                            jsonParam.put("start_time", start_t);
+                            jsonParam.put("end_date", date1);
+                            jsonParam.put("end_time", finish_t);
+                            jsonParam.put("repeat", currentSelectedRepeaterIndex);
+                            jsonParam.put("reminder", currentSelectedReminderIndex);
+
+
+                            Log.i("JSON", jsonParam.toString());
+                            DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+                            //os.writeBytes(URLEncoder.encode(jsonParam.toString(), "UTF-8"));
+                            os.writeBytes(jsonParam.toString());
+
+                            date1 = addDay(date1, 14);
+
+                            Log.i("STATUS", String.valueOf(conn.getResponseCode()));
+                            Log.i("MSG", conn.getResponseMessage());
+
+                            conn.disconnect();
+                        }
+                    }
+                    else if(currentSelectedRepeaterIndex.equals("Every month")) {
+                        Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(currentSelectedDate);
+
+                        for (int i = 0; i < 10; i++) {
+                            URL url = new URL("https://immense-coast-39524.herokuapp.com/calendars");
+                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                            conn.setRequestMethod("POST");
+                            conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                            conn.setRequestProperty("Accept", "application/json");
+                            conn.setDoOutput(true);
+                            conn.setDoInput(true);
+
+                            JSONObject jsonParam = new JSONObject();
+                            jsonParam.put("title", title);
+                            jsonParam.put("content", content);
+                            jsonParam.put("location", location);
+                            jsonParam.put("start_date", date1);
+                            jsonParam.put("start_time", start_t);
+                            jsonParam.put("end_date", date1);
+                            jsonParam.put("end_time", finish_t);
+                            jsonParam.put("repeat", currentSelectedRepeaterIndex);
+                            jsonParam.put("reminder", currentSelectedReminderIndex);
+
+
+                            Log.i("JSON", jsonParam.toString());
+                            DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+                            //os.writeBytes(URLEncoder.encode(jsonParam.toString(), "UTF-8"));
+                            os.writeBytes(jsonParam.toString());
+
+                            date1 = addMonth(date1, 1);
+
+                            Log.i("STATUS", String.valueOf(conn.getResponseCode()));
+                            Log.i("MSG", conn.getResponseMessage());
+
+                            conn.disconnect();
+                        }
+                    }
+                    else if(currentSelectedRepeaterIndex.equals("Every year")) {
+                        Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(currentSelectedDate);
+
+                        for (int i = 0; i < 10; i++) {
+                            URL url = new URL("https://immense-coast-39524.herokuapp.com/calendars");
+                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                            conn.setRequestMethod("POST");
+                            conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                            conn.setRequestProperty("Accept", "application/json");
+                            conn.setDoOutput(true);
+                            conn.setDoInput(true);
+
+                            JSONObject jsonParam = new JSONObject();
+                            jsonParam.put("title", title);
+                            jsonParam.put("content", content);
+                            jsonParam.put("location", location);
+                            jsonParam.put("start_date", date1);
+                            jsonParam.put("start_time", start_t);
+                            jsonParam.put("end_date", date1);
+                            jsonParam.put("end_time", finish_t);
+                            jsonParam.put("repeat", currentSelectedRepeaterIndex);
+                            jsonParam.put("reminder", currentSelectedReminderIndex);
+
+
+                            Log.i("JSON", jsonParam.toString());
+                            DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+                            //os.writeBytes(URLEncoder.encode(jsonParam.toString(), "UTF-8"));
+                            os.writeBytes(jsonParam.toString());
+
+                            date1 = addYear(date1, 1);
+
+                            Log.i("STATUS", String.valueOf(conn.getResponseCode()));
+                            Log.i("MSG", conn.getResponseMessage());
+
+                            conn.disconnect();
+                        }
+                    }
+                    else{
+                        Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(currentSelectedDate);
+
+                            URL url = new URL("https://immense-coast-39524.herokuapp.com/calendars");
+                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                            conn.setRequestMethod("POST");
+                            conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                            conn.setRequestProperty("Accept", "application/json");
+                            conn.setDoOutput(true);
+                            conn.setDoInput(true);
+
+                            JSONObject jsonParam = new JSONObject();
+                            jsonParam.put("title", title);
+                            jsonParam.put("content", content);
+                            jsonParam.put("location", location);
+                            jsonParam.put("start_date", date1);
+                            jsonParam.put("start_time", start_t);
+                            jsonParam.put("end_date", date1);
+                            jsonParam.put("end_time", finish_t);
+                            jsonParam.put("repeat", currentSelectedRepeaterIndex);
+                            jsonParam.put("reminder", currentSelectedReminderIndex);
+
+
+                            Log.i("JSON", jsonParam.toString());
+                            DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+                            //os.writeBytes(URLEncoder.encode(jsonParam.toString(), "UTF-8"));
+                            os.writeBytes(jsonParam.toString());
+
+                            Log.i("STATUS", String.valueOf(conn.getResponseCode()));
+                            Log.i("MSG", conn.getResponseMessage());
+
+                            conn.disconnect();
+
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -195,5 +381,22 @@ public class PopupActivity extends AppCompatActivity {
 
         thread.start();
     }
-
+    public static Date addDay(Date date, int i) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DAY_OF_YEAR, i);
+        return cal.getTime();
+    }
+    public static Date addMonth(Date date, int i) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.MONTH, i);
+        return cal.getTime();
+    }
+    public static Date addYear(Date date, int i) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.YEAR, i);
+        return cal.getTime();
+    }
 }
