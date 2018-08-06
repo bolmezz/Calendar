@@ -16,7 +16,7 @@
         android:textColor="#FFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.659"
+        app:layout_constraintHorizontal_bias="0.407"
         app:layout_constraintStart_toEndOf="@+id/cancel_btn"
         app:layout_constraintTop_toBottomOf="@+id/event_loc"
         app:layout_constraintVertical_bias="0.957"
@@ -32,17 +32,17 @@
         android:textColor="#FFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.671"
+        app:layout_constraintHorizontal_bias="0.247"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.969"
+        app:layout_constraintVertical_bias="0.973"
         tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/event_title"
-        android:layout_width="wrap_content"
+        android:layout_width="228dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="116dp"
+        android:layout_marginEnd="110dp"
         android:ems="10"
         android:hint="Title"
         android:inputType="textPersonName"
@@ -54,9 +54,9 @@
 
     <EditText
         android:id="@+id/event_content"
-        android:layout_width="wrap_content"
+        android:layout_width="229dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="116dp"
+        android:layout_marginEnd="110dp"
         android:ems="10"
         android:hint="Content"
         android:inputType="textPersonName"
@@ -68,9 +68,9 @@
 
     <EditText
         android:id="@+id/event_loc"
-        android:layout_width="wrap_content"
+        android:layout_width="229dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="116dp"
+        android:layout_marginEnd="110dp"
         android:ems="10"
         android:hint="Location"
         android:inputType="textPersonName"
@@ -91,10 +91,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/repeat_btn"
-        app:layout_constraintHorizontal_bias="0.222"
+        app:layout_constraintHorizontal_bias="0.586"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.442" />
+        app:layout_constraintVertical_bias="0.44" />
 
     <Button
         android:id="@+id/repeat_btn"
@@ -105,9 +105,10 @@
         android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.659"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.441" />
+        app:layout_constraintVertical_bias="0.44" />
 
 
     <TimePicker
@@ -119,7 +120,7 @@
         android:timePickerMode="spinner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.577"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.621"
@@ -135,10 +136,10 @@
         android:timePickerMode="spinner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.577"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.831"
+        app:layout_constraintVertical_bias="0.829"
         tools:ignore="MissingConstraints"></TimePicker>
 
     <TextView
@@ -148,19 +149,19 @@
         android:text=" Start : "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintHorizontal_bias="0.198"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.56" />
+        app:layout_constraintVertical_bias="0.607" />
 
     <TextView
         android:id="@+id/t_finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="100dp"
         android:text="Finish : "
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/t_start" />
 

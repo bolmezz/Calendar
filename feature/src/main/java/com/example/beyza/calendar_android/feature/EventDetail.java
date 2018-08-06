@@ -127,10 +127,14 @@ public class EventDetail extends AppCompatActivity {
                 JSONArray ja = new JSONArray(s);
                 int count =ja.length();
 
-                for(int i =0; i<count;i++){
+                if(count == 0){
+                    text.append("No event has been found!");
+                }
+                else {
+                    for (int i = 0; i < count; i++) {
 
-                    text.append("EVENT - " +(i+1)+"\n");
-                    JSONObject jo = ja.getJSONObject(i);
+                        text.append("EVENT - " + (i + 1) + "\n");
+                        JSONObject jo = ja.getJSONObject(i);
                         text.append("Title: " + jo.getString("title") + "\n");
                         text.append("Content: " + jo.getString("content") + "\n");
                         text.append("Location: " + jo.getString("location") + "\n");
@@ -142,6 +146,7 @@ public class EventDetail extends AppCompatActivity {
                         text.append("Reminer: " + jo.getString("reminder") + "\n");
                         text.append("\n\n");
 
+                    }
                 }
 
             } catch (JSONException e) {

@@ -2,6 +2,9 @@ package com.example.beyza.calendar_android.feature;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -16,6 +19,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+
+import static android.graphics.Color.BLUE;
+import static android.graphics.Color.GREEN;
+import static android.graphics.Color.RED;
 
 
 public class MainActivity extends AppCompatActivity
@@ -62,7 +69,6 @@ public class MainActivity extends AppCompatActivity
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
                 String secilenTarih = (i)+"-"+(i1+1)+"-"+i2;
                 setDate(secilenTarih);
-
             }
         });
 
@@ -72,7 +78,6 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this,PopupActivity.class));
-
             }
         });
     }

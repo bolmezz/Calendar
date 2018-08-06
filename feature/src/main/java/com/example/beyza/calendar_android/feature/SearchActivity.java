@@ -44,14 +44,13 @@ public class SearchActivity extends AppCompatActivity {
 
     public String getSearch()
     {
-
-    return search_word;
-
+        return search_word;
     }
 
     public void setSearch(String s)
     {
         search_word = s;
+        search_word = search_word.replaceAll(" ", "%20");
     }
 
 
