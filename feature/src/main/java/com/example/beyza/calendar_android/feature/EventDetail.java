@@ -8,18 +8,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class EventDetail extends AppCompatActivity {
 
@@ -27,7 +30,7 @@ public class EventDetail extends AppCompatActivity {
     Button edit,delete;
     String s;
     ProgressDialog pDialog;
-
+    ArrayList<String> ids = new ArrayList<>();
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
 
@@ -52,12 +55,11 @@ public class EventDetail extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-
-
-
-
+                for (int i = 0; i<ids.size();i++) {
+                    new removeRequest().execute("https://immense-coast-39524.herokuapp.com/calendars/" + ids.get(i));   //data to be removed
+                }
+                Toast.makeText(EventDetail.this, "Removed Event(s)!", Toast.LENGTH_SHORT).show();
             }
-
         });
 
        edit.setOnClickListener( new View.OnClickListener() {
@@ -81,7 +83,7 @@ public class EventDetail extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(EventDetail.this);
-            pDialog.setMessage("Searching..");
+            pDialog.setMessage("Searching...");
             pDialog.show();
 
         }
@@ -131,6 +133,7 @@ public class EventDetail extends AppCompatActivity {
                     text.append("No event has been found!");
                 }
                 else {
+                    ids.clear();
                     for (int i = 0; i < count; i++) {
 
                         text.append("EVENT - " + (i + 1) + "\n");
@@ -145,6 +148,7 @@ public class EventDetail extends AppCompatActivity {
                         text.append("Repeat: " + jo.getString("repeat") + "\n");
                         text.append("Reminer: " + jo.getString("reminder") + "\n");
                         text.append("\n\n");
+                        ids.add(jo.getString("id"));
 
                     }
                 }
@@ -160,7 +164,45 @@ public class EventDetail extends AppCompatActivity {
 
     }//class
 
+    private class removeRequest extends AsyncTask<String,String,String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
 
-
-
+        @Override
+        protected String doInBackground(String... urls) {
+            String result = null;
+            URL url = null;
+            try {
+                url = new URL(urls[0]);
+                Log.i("URL to access :", urls[0]);
+            } catch (MalformedURLException exception) {
+                exception.printStackTrace();
             }
+            HttpURLConnection httpURLConnection = null;
+            try {
+                httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("DELETE");
+                httpURLConnection.setRequestProperty("charset", "utf-8");
+                httpURLConnection.setUseCaches(false);
+                System.out.println("ResponseCode: "+httpURLConnection.getResponseCode());
+                Log.i("STATUS", String.valueOf(httpURLConnection.getResponseCode()));
+                Log.i("MSG" , httpURLConnection.getResponseMessage());
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            } finally {
+                if (httpURLConnection != null) {
+                    httpURLConnection.disconnect();
+                }
+            }
+
+            return null;
+        }
+
+
+    }//class
+
+
+
+}
