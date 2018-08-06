@@ -28,21 +28,22 @@ public class EventDetail extends AppCompatActivity {
     String s;
     ProgressDialog pDialog;
 
+    @Override
     protected void onCreate(final Bundle savedInstanceState) {
 
-        SearchActivity sa = new SearchActivity();
-        super.onCreate(savedInstanceState);
 
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.events);
 
+        SearchActivity sa = new SearchActivity();
         s = sa.getSearch();
 
-       text = (TextView)findViewById(R.id.textView2);
-       text.setText(s);
-       delete = (Button) findViewById(R.id.delete_btn);
-       edit = (Button) findViewById(R.id.edit_btn);
+        text = (TextView)findViewById(R.id.text2);
+        text.setText("");
+        delete = (Button) findViewById(R.id.delete_btn);
+        edit = (Button) findViewById(R.id.edit_btn);
 
-       new EventDetail.GetContacts().execute("https://immense-coast-39524.herokuapp.com/calendars");
+        new GetContacts().execute("https://immense-coast-39524.herokuapp.com/calendars/search/"+s);//düzgün alınıyor.
 
 
 
@@ -51,6 +52,7 @@ public class EventDetail extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
+
 
 
 
@@ -64,7 +66,7 @@ public class EventDetail extends AppCompatActivity {
             public void onClick(View view)
             {
 
-
+                // startActivity(new Intent(EventDetail.this, PopupActivity.class));
             }
 
         });
@@ -72,7 +74,6 @@ public class EventDetail extends AppCompatActivity {
 
 
     }//oncreate
-
 
 
     private class GetContacts extends AsyncTask<String,String,String> {
@@ -127,10 +128,9 @@ public class EventDetail extends AppCompatActivity {
                 int count =ja.length();
 
                 for(int i =0; i<count;i++){
+
+                    text.append("EVENT - " +(i+1)+"\n");
                     JSONObject jo = ja.getJSONObject(i);
-
-                    if(jo.getString("title").equalsIgnoreCase(s)) {
-
                         text.append("Title: " + jo.getString("title") + "\n");
                         text.append("Content: " + jo.getString("content") + "\n");
                         text.append("Location: " + jo.getString("location") + "\n");
@@ -142,16 +142,12 @@ public class EventDetail extends AppCompatActivity {
                         text.append("Reminer: " + jo.getString("reminder") + "\n");
                         text.append("\n\n");
 
-                    }
-                    else
-                    {
-                        text.setText("Event has not found !");
-                    }
-
                 }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
             pDialog.dismiss();
 
         }
@@ -162,4 +158,4 @@ public class EventDetail extends AppCompatActivity {
 
 
 
-}
+            }

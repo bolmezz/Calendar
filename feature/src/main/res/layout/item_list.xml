@@ -7,9 +7,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="10dp"
-        >
+        android:layout_height="454dp"
+        android:layout_centerInParent="true"
+        android:padding="10dp">
 
 
         <TextView
@@ -20,5 +20,18 @@
             android:text=""
             android:textColor="@android:color/black" />
     </ScrollView>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="179dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="19dp"
+        android:text="EVENTS"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold" />
 
 </RelativeLayout>

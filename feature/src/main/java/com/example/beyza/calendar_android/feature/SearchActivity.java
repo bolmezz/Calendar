@@ -34,7 +34,6 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 setSearch(sword.getText().toString());
-
                 startActivity(new Intent(SearchActivity.this, EventDetail.class));
             }
         });

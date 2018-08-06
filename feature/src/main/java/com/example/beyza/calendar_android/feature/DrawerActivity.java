@@ -8,7 +8,6 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,6 +34,7 @@ public class DrawerActivity extends AppCompatActivity {
     ListView events;
     ArrayList<HashMap<String, String>> contactList;
     TextView titleT ;
+    TextView header;
 
     public DrawerActivity() {
     }
@@ -49,6 +49,7 @@ public class DrawerActivity extends AppCompatActivity {
         setContentView(R.layout.item_list);
 
         titleT = (TextView) findViewById(R.id.title);
+        header = (TextView) findViewById(R.id.textView2);
 
         pDialog = new ProgressDialog(DrawerActivity.this);
         pDialog.setMessage("Fetching From Server...");
@@ -74,7 +75,6 @@ public class DrawerActivity extends AppCompatActivity {
             BufferedReader br = null;
 
                 try {
-
 
                   URL url = new URL(params[0]);
                   connection =(HttpURLConnection) url.openConnection();
@@ -112,7 +112,7 @@ public class DrawerActivity extends AppCompatActivity {
 
                 for(int i =0; i<count;i++){
 
-                     titleT.append("EVENT" +(i+1)+"\n");
+                     titleT.append("EVENT - " +(i+1)+"\n");
                     JSONObject jo = ja.getJSONObject(i);
                     titleT.append("Title: " + jo.getString("title") + "\n");
                     titleT.append("Content: " + jo.getString("content") + "\n");
