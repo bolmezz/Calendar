@@ -137,6 +137,8 @@ public class PopupActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
+
+
                     title = et_title.getText().toString();
                     content = et_content.getText().toString();
                     location = et_loc.getText().toString();
@@ -157,6 +159,8 @@ public class PopupActivity extends AppCompatActivity {
                         Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(currentSelectedDate);
 
                         for (int i = 0; i <10;i++) {
+
+
                             URL url = new URL("https://immense-coast-39524.herokuapp.com/calendars");
                             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                             conn.setRequestMethod("POST");
@@ -188,10 +192,14 @@ public class PopupActivity extends AppCompatActivity {
                             Log.i("MSG" , conn.getResponseMessage());
 
                             conn.disconnect();
+
+
                         }
 
                     }
                     else if(currentSelectedRepeaterIndex.equals("Every week")) {
+
+
                         Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(currentSelectedDate);
 
                         for (int i = 0; i < 10; i++) {
@@ -226,9 +234,13 @@ public class PopupActivity extends AppCompatActivity {
                             Log.i("MSG", conn.getResponseMessage());
 
                             conn.disconnect();
+
+
                         }
                     }
                     else if(currentSelectedRepeaterIndex.equals("Every 2 weeks")) {
+
+
                         Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(currentSelectedDate);
 
                         for (int i = 0; i < 10; i++) {
@@ -263,9 +275,13 @@ public class PopupActivity extends AppCompatActivity {
                             Log.i("MSG", conn.getResponseMessage());
 
                             conn.disconnect();
+
+
                         }
                     }
                     else if(currentSelectedRepeaterIndex.equals("Every month")) {
+
+
                         Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(currentSelectedDate);
 
                         for (int i = 0; i < 10; i++) {
@@ -300,12 +316,16 @@ public class PopupActivity extends AppCompatActivity {
                             Log.i("MSG", conn.getResponseMessage());
 
                             conn.disconnect();
+
+
                         }
                     }
                     else if(currentSelectedRepeaterIndex.equals("Every year")) {
                         Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(currentSelectedDate);
 
                         for (int i = 0; i < 10; i++) {
+
+
                             URL url = new URL("https://immense-coast-39524.herokuapp.com/calendars");
                             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                             conn.setRequestMethod("POST");
@@ -337,9 +357,13 @@ public class PopupActivity extends AppCompatActivity {
                             Log.i("MSG", conn.getResponseMessage());
 
                             conn.disconnect();
+
+
                         }
                     }
-                    else{
+                    else if(currentSelectedRepeaterIndex.equals("Never")){
+
+
                         Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(currentSelectedDate);
 
                             URL url = new URL("https://immense-coast-39524.herokuapp.com/calendars");
@@ -382,21 +406,27 @@ public class PopupActivity extends AppCompatActivity {
         thread.start();
     }
     public static Date addDay(Date date, int i) {
+
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         cal.add(Calendar.DAY_OF_YEAR, i);
         return cal.getTime();
+
     }
     public static Date addMonth(Date date, int i) {
+
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         cal.add(Calendar.MONTH, i);
         return cal.getTime();
+
     }
     public static Date addYear(Date date, int i) {
+
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         cal.add(Calendar.YEAR, i);
         return cal.getTime();
+
     }
 }
